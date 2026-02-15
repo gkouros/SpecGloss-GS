@@ -32,7 +32,7 @@ pip install submodules/raytracing
 python scripts/nero2blender.py --path ./data/GlossySynthetic
 ```
 
-3) Download the [normal-diffuse prior images]() generated via [StableNormal](https://github.com/Stable-X/StableNormal) and [StableDelight](https://github.com/Stable-X/StableDelight) for all datasets and put them on the corresponding scene dirs.
+3) Download the [normal-diffuse prior images](https://drive.google.com/file/d/1kIDpaumBkZbiswvabnN9DCfYMoadNzaL/view?usp=sharing) generated via [StableNormal](https://github.com/Stable-X/StableNormal) and [StableDelight](https://github.com/Stable-X/StableDelight) for all datasets and put them on the corresponding scene dirs.
 
 4) Arrange the datasets as follows:
 ```bash
