@@ -39,22 +39,22 @@ python scripts/nero2blender.py --path ./data/GlossySynthetic
 ./data/
 ├── glossy_synthetic/
 │   ├── angel/
-|   │   ├── rgb/
-|   │   ├── StableNormal_rgb/
-|   │   ├── StableDelight_rgb/
-|   │   ├── StableNormal_images/
-|   │   ├── test_transforms.json
-|   │   └── train_transforms.json
+│   │   ├── rgb/
+│   │   ├── StableNormal_rgb/
+│   │   ├── StableDelight_rgb/
+│   │   ├── StableNormal_images/
+│   │   ├── test_transforms.json
+│   │   └── train_transforms.json
 .   .
 .   .
 ├── ref_shiny/
 │   ├── ball/
-|   │   ├── train/
-|   │   ├── test/
-|   │   ├── StableNormal_train/
-|   │   ├── StableDelight_train/
-|   │   ├── test_transforms.json
-|   │   └── train_transforms.json
+│   │   ├── train/
+│   │   ├── test/
+│   │   ├── StableNormal_train/
+│   │   ├── StableDelight_train/
+│   │   ├── test_transforms.json
+│   │   └── train_transforms.json
 .   .
 .   .
 └── ref_real/
