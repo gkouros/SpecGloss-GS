@@ -27,16 +27,21 @@ pip install submodules/raytracing
 ## Datasets
 1) Download the datasets [Shiny Synthetic](https://storage.googleapis.com/gresearch/refraw360/ref.zip), [Shiny Real](https://storage.googleapis.com/gresearch/refraw360/ref_real.zip), and [Glossy Synthetic](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=MaonKe).
 
-2) Download the [normal-diffuse prior images]() generated via [StableNormal](https://github.com/Stable-X/StableNormal) and [StableDelight](https://github.com/Stable-X/StableDelight) for all datasets and put them on the corresponding scene dirs.
+2) Convert the glossy dataset to blender format:
+```bash
+python scripts/nero2blender.py --path ./data/GlossySynthetic
+```
 
-3) Arrange the datasets as follows:
+3) Download the [normal-diffuse prior images]() generated via [StableNormal](https://github.com/Stable-X/StableNormal) and [StableDelight](https://github.com/Stable-X/StableDelight) for all datasets and put them on the corresponding scene dirs.
+
+4) Arrange the datasets as follows:
 ```bash
 ./data/
 ├── glossy_synthetic/
 │   ├── angel/
 |   │   ├── rgb/
-    │   ├── StableNormal_rgb/
-    │   ├── StableDelight_rgb/
+|   │   ├── StableNormal_rgb/
+|   │   ├── StableDelight_rgb/
 |   │   ├── StableNormal_images/
 |   │   ├── test_transforms.json
 |   │   └── train_transforms.json
@@ -46,8 +51,8 @@ pip install submodules/raytracing
 │   ├── ball/
 |   │   ├── train/
 |   │   ├── test/
-    │   ├── StableNormal_train/
-    │   ├── StableDelight_train/
+|   │   ├── StableNormal_train/
+|   │   ├── StableDelight_train/
 |   │   ├── test_transforms.json
 |   │   └── train_transforms.json
 .   .
@@ -63,8 +68,6 @@ pip install submodules/raytracing
     .
 
 ```
-
-
 
 ## Evaluation
 To evaluate our method run the following commands:
@@ -82,8 +85,6 @@ To visualize a scene, first run the web server with the following command:
 python view.py -m "/path/to/experiment"
 ```
 Then on a web browser go to the following address: https://localhost:8080
-
-
 
 ## Acknowledgement
 We gratefully acknowledge the following works that were instrumental in the development of our method:

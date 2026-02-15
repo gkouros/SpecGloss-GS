@@ -1,0 +1,31 @@
+name: rgs
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13.1
+  - pip=23.3.1
+  - gcc_linux-64=12
+  - gxx_linux-64=12
+  - typing_extensions=4.9.0
+  # - open3d=0.18.0
+  # - pillow=11.2.1
+  - pip:
+    - torch==2.7.1
+    - torchaudio==2.7.1
+    - torchvision==0.22.1
+    - mediapy==1.1.2
+    - lpips==0.1.4
+    - scikit-image==0.21.0
+    - tqdm==4.66.2
+    - trimesh==4.3.2
+    - plyfile
+    - opencv-python
+    - gputil==1.4.0
+    - viser==0.2.23
+    - openexr
+    - git+https://github.com/NVlabs/nvdiffrast/
+    # - submodules/diff-surfel-rasterization
+    # - submodules/simple-knn
