@@ -48,7 +48,6 @@ if __name__ == "__main__":
     parser.add_argument("--edit", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--render_path", action="store_true")
-    parser.add_argument("--render_disney", action="store_true")
     parser.add_argument("--num_render", default=-1, type=int,  help="How many samples to render")
     parser.add_argument("--voxel_size", default=-1.0, type=float, help='Mesh: voxel size for TSDF')
     parser.add_argument("--depth_trunc", default=-1.0, type=float, help='Mesh: Max depth range for TSDF')
@@ -66,19 +65,14 @@ if __name__ == "__main__":
     dataset, iteration, pipe = model.extract(args), args.iteration, pipeline.extract(args)
     gaussians = GaussianModel(dataset)
 
-    if args.render_disney:
-        gaussians.use_specular = False
-        gaussians.disney_brdf = True
-        gaussians.spec_gloss_brdf = False
-
     scene = Scene(dataset, gaussians, load_iteration=iteration, shuffle=False)
     if dataset.sh_degree > 0:
         gaussians.activate_residual()
     bg_color = [1,1,1] if dataset.white_background else [0,0,0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
-    train_dir = os.path.join(args.model_path, 'train' + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-    test_dir = os.path.join(args.model_path, 'test' + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
+    train_dir = os.path.join(args.model_path, 'train', "ours_{}".format(scene.loaded_iter))
+    test_dir = os.path.join(args.model_path, 'test', "ours_{}".format(scene.loaded_iter))
     gaussExtractor = GaussianExtractor(gaussians, render, pipe, bg_color=bg_color, num_render=args.num_render)
 
     if not args.skip_train:
@@ -95,7 +89,7 @@ if __name__ == "__main__":
 
     if args.render_path and not args.relight_envmap_path:
         print("render videos ...")
-        traj_dir = os.path.join(args.model_path, 'traj' + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
+        traj_dir = os.path.join(args.model_path, 'traj', "ours_{}".format(scene.loaded_iter))
         os.makedirs(traj_dir, exist_ok=True)
         n_frames = 240
         cam_traj = generate_path(scene.getTrainCameras(), n_frames=n_frames)
@@ -130,7 +124,7 @@ if __name__ == "__main__":
         relight_envmap_name = "".join(args.relight_envmap_path.split("/")[-1])
         print(f"Relighting using {relight_envmap_name}")
         dirname = "relight" if not args.render_path else "traj_relight"
-        relight_dir = os.path.join(args.model_path, dirname + "_disney" * args.render_disney, relight_envmap_name, "ours_{}".format(scene.loaded_iter))
+        relight_dir = os.path.join(args.model_path, dirname, relight_envmap_name, "ours_{}".format(scene.loaded_iter))
         os.makedirs(relight_dir, exist_ok=True)
         os.makedirs(os.path.join(relight_dir, 'envmaps'), exist_ok=True)
 
