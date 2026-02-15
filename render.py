@@ -72,7 +72,7 @@ if __name__ == "__main__":
         gaussians.spec_gloss_brdf = False
 
     scene = Scene(dataset, gaussians, load_iteration=iteration, shuffle=False)
-    if dataset.k_dim > 0 or dataset.sh_degree > 0:
+    if dataset.sh_degree > 0:
         gaussians.activate_residual()
     bg_color = [1,1,1] if dataset.white_background else [0,0,0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
@@ -101,10 +101,6 @@ if __name__ == "__main__":
         cam_traj = generate_path(scene.getTrainCameras(), n_frames=n_frames)
         gaussExtractor.reconstruction(cam_traj, traj=True)
         gaussExtractor.export_image(traj_dir, skip_misc=False, traj=True)
-        # create_videos(base_dir=traj_dir,
-        #             input_dir=traj_dir,
-        #             out_name='render_traj',
-        #             num_frames=n_frames)
 
     if not args.skip_mesh:
         print("export mesh ...")
@@ -173,72 +169,3 @@ if __name__ == "__main__":
 
         gaussExtractor.reconstruction(cam_traj, relight=True, traj=args.render_path)
         gaussExtractor.export_image(relight_dir, skip_misc=True, traj=args.render_path)
-
-
-    # apply scene editing if the multipliers differ from 1.0
-    if args.edit:
-        with torch.no_grad():
-            # render scene with edited albedo
-            edit_dir = f'edit/bgr'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            gaussians._base_color = gaussians._base_color[..., [2,1,0]]  # RGB to BGR
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
-
-            # render scene with edited albedo
-            edit_dir = f'edit/rbg'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            gaussians._base_color = gaussians._base_color[..., [2,0,1]]  # BGR to RBG
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
-
-            # restore original albedo
-            gaussians._base_color = gaussians._base_color[..., [0,2,1]]  # RBG to RGB
-
-            # render scene with edited roughness
-            edit_dir = f'edit/rougher'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            temp_roughness = copy.deepcopy(gaussians.get_roughness)
-            gaussians.use_residual = False
-            gaussians._roughness = gaussians.inverse_roughness_activation(torch.ones_like(gaussians._roughness))
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
-            gaussians.use_residual = True
-
-            # render scene with edited roughness
-            edit_dir = f'edit/smoother'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            gaussians._roughness = gaussians.inverse_roughness_activation(0.02 * torch.ones_like(gaussians._roughness))
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
-
-            # restore original roughness
-            gaussians._roughness = gaussians.inverse_roughness_activation(temp_roughness)
-
-            # render scene with edited specular
-            edit_dir = f'edit/plastic'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            gaussians.use_residual = False
-            gaussians._specular = gaussians.inverse_specular_activation(0.02 * torch.ones_like(gaussians._specular))
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
-
-            # render scene with edited roughness
-            edit_dir = f'edit/mirror'
-            test_dir = os.path.join(args.model_path, edit_dir + "_disney" * args.render_disney, "ours_{}".format(scene.loaded_iter))
-            print(f"export edited images with settings {edit_dir} ...")
-            os.makedirs(test_dir, exist_ok=True)
-            gaussians.use_residual = True
-            gaussians._specular = gaussians.inverse_specular_activation(torch.ones_like(gaussians._specular))
-            gaussExtractor.reconstruction(scene.getTestCameras())
-            gaussExtractor.export_image(test_dir, skip_misc=True)
