@@ -72,11 +72,11 @@ python scripts/nero2blender.py --path ./data/GlossySynthetic
 ## Evaluation
 To evaluate our method run the following commands:
 ```bash
-python scripts/glossy_eval.py  --scene=all # choose from {all, angel, bell, cat, horse, luyu, potion, tbell, teapot}
+python scripts/glossy_eval.py --scene=all <exp_name> # choose from {all, angel, bell, cat, horse, luyu, potion, tbell, teapot}
 
-python scripts/shiny_eval.py  --scene=all # choose from {all, ball, car, coffee, helmet, teapot, toaster}
+python scripts/shiny_eval.py --scene=all <exp_name> # choose from {all, ball, car, coffee, helmet, teapot, toaster}
 
-python scripts/real_eval.py  --scene=all # choose from {all, gardenspheres, sedan, toycar}
+python scripts/real_eval.py --scene=all <exp_name> # choose from {all, gardenspheres, sedan, toycar}
 ```
 
 ## Visualization
