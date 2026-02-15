@@ -357,7 +357,7 @@ class GaussianExtractor(object):
             save_img_u8(self.rgbmaps[idx].permute(1,2,0).cpu().numpy(), os.path.join(render_path, '{0:05d}'.format(idx) + ".png"))
             # save_image_raw(os.path.join(render_path, '{0:05d}'.format(idx) + ".hdr"), self.rgbmaps[idx].permute(1,2,0).cpu().numpy())
 
-            if not traj and not skip_misc:
+            if not traj:
                 save_img_u8(self.gts[idx].permute(1,2,0).cpu().numpy(), os.path.join(gts_path, '{0:05d}'.format(idx) + ".png"))
                 save_img_u8(self.errormaps[idx].permute(1,2,0).cpu().numpy(), os.path.join(vis_path, 'error_{0:05d}'.format(idx) + ".png"))
 
