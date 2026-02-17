@@ -1,7 +1,7 @@
 # Spec-Gloss Surfels and Normal–Diffuse Priors for Relightable Glossy Objects
 Georgios Kouros, Minye Wu, Tinne Tuytelaars
 
-| [Project page](https://gkouros.github.io/projects/SpecGloss-GS/) | [Full paper](https://arxiv.org/abs/2510.02069) |
+| [Project page](https://gkouros.github.io/projects/SpecGloss-GS/) | [Full paper](https://arxiv.org/abs/2510.02069) | [Video](https://www.youtube.com/watch?v=Wo4CBEQQyWc) |
 
 **This repository contains the official implementation of the paper "Spec-Gloss Surfels and Normal–Diffuse Priors for Relightable Glossy Objects" that will appear at WACV 2026 (oral).**
 
