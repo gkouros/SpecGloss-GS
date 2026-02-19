@@ -597,7 +597,7 @@ if __name__ == "__main__":
 
         exp_name, dataset_name, scene_name = args.model_path.split('/')[-3:]
         wandb.init(
-            project="refgshader",  # set the wandb project where this run will be logged
+            project="SpecGloss-GS",  # set the wandb project where this run will be logged
             config=vars(args),  # track hyperparameters and run metadata
             group=dataset_name,
             name=f"{scene_name}.{exp_name}",
