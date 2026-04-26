@@ -99,13 +99,12 @@ We gratefully acknowledge the following works that were instrumental in the deve
 
 ## BibTeX
 ```bibtex
-@misc{kouros2025specglossgs,
-        title={Spec-Gloss Surfels and Normal-Diffuse Priors for Relightable Glossy Objects},
-        author={Georgios Kouros and Minye Wu and Tinne Tuytelaars},
-        year={2025},
-        eprint={2510.02069},
-        archivePrefix={arXiv},
-        primaryClass={cs.GR},
-        url={https://arxiv.org/abs/2510.02069},
-      }
+@InProceedings{Kouros_2026_WACV,
+    author    = {Kouros, Georgios and Wu, Minye and Tuytelaars, Tinne},
+    title     = {Spec-Gloss Surfels and Normal-Diffuse Priors for Relightable Glossy Objects},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {March},
+    year      = {2026},
+    pages     = {4417-4426}
+}
 ```
