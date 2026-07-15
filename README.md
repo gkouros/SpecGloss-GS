@@ -25,7 +25,9 @@ pip install submodules/raytracing
 ```
 
 ## Datasets
-1) Download the datasets [Shiny Synthetic](https://storage.googleapis.com/gresearch/refraw360/ref.zip), [Shiny Real](https://storage.googleapis.com/gresearch/refraw360/ref_real.zip), and [Glossy Synthetic](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=MaonKe).
+1) Download the datasets [Shiny Synthetic](https://storage.googleapis.com/gresearch/refraw360/ref.zip), [Shiny Real](https://storage.googleapis.com/gresearch/refraw360/ref_real.zip), and [Glossy Synthetic](https://drive.google.com/file/d/1KiMFLBWajEU1nf4ffmjlKo5eMUq3odbh/view?usp=sharing) (**updated link**).
+
+The glossy synthetic dataset was originally released by [NeRO](https://liuyuan-pal.github.io/NeRO/). The [original download link](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=MaonKe) is no longer available, so we provide a copy used in our experiments for reproducibility. We do not claim ownership of this dataset or grant any additional usage rights. Please refer to the original source for licensing information.
 
 2) Convert the glossy dataset to blender format:
 ```bash
